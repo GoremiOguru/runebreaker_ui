@@ -92,3 +92,36 @@ body {
     overflow: hidden;
   }
 }
+
+/* Lock scroll behavior on mobile/tablet viewports to prevent browser bouncing */
+@media (max-width: 1024px) {
+  html, body {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Custom layout root for adaptive mobile orientation scaling */
+.game-layout-root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Scale height to match parent rotated viewport height on mobile portrait */
+@media (max-width: 900px) and (orientation: portrait) {
+  .game-layout-root {
+    min-height: 100%;
+    height: 100%;
+  }
+}
+
+/* Force height lock in physical landscape mode */
+@media (orientation: landscape) and (max-height: 600px) {
+  .game-layout-root {
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+  }
+}

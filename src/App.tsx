@@ -293,6 +293,29 @@ function App() {
     return () => window.removeEventListener('click', handleFirstGesture);
   }, [soundEnabled, currentScreen]);
 
+  // Handle audio state on tab visibility change (e.g. backgrounding, switching tabs)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (introAudioRef.current) introAudioRef.current.pause();
+        if (winAudioRef.current) winAudioRef.current.pause();
+      } else {
+        if (soundEnabled) {
+          if (currentScreen === 'prep' && introAudioRef.current) {
+            introAudioRef.current.play().catch(() => {});
+          } else if (currentScreen === 'victory' && winAudioRef.current) {
+            winAudioRef.current.play().catch(() => {});
+          }
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [currentScreen, soundEnabled]);
+
   // COMBAT ENGINE: Enemy auto-attack interval loop
   useEffect(() => {
     if (currentScreen === 'combat') {
@@ -452,7 +475,7 @@ function App() {
 
   return (
     <div className="mobile-landscape-force">
-      <div className={`min-h-screen bg-slate-950 text-gray-100 flex flex-col justify-between font-sans scanlines ${isShake ? 'animate-shake' : ''}`}>
+      <div className={`game-layout-root bg-slate-950 text-gray-100 flex flex-col justify-between font-sans scanlines ${isShake ? 'animate-shake' : ''}`}>
         
         {/* HEADER BANNER */}
         <header className="border-b border-amber-900/40 bg-slate-950/80 backdrop-blur-md px-6 py-4 landscape-short:px-3 landscape-short:py-1 flex items-center justify-between">
