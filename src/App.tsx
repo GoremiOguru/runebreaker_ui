@@ -522,14 +522,14 @@ function App() {
         </header>
 
       {/* MAIN CONTAINER */}
-      <main className="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 landscape-short:p-2 flex flex-col justify-center">
+      <main className="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 landscape-short:p-2 flex flex-col justify-center overflow-hidden">
         
         {/* PREP SCREEN */}
         {currentScreen === 'prep' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-2 gap-6 landscape-short:gap-3 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-2 gap-6 landscape-short:gap-3 items-stretch flex-grow overflow-hidden">
             
             {/* LEFT COLUMN: BESTIARY PROFILE */}
-            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border game-card-height">
+            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border h-full overflow-hidden">
               <div className="flex items-center gap-2 landscape-short:gap-1.5 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                 <BookOpen className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
                 <h2 className="text-lg landscape-short:text-xs font-bold font-medieval text-amber-500 tracking-wide uppercase">Bestiary Index: Necrophages</h2>
@@ -591,7 +591,7 @@ function App() {
             </div>
 
             {/* RIGHT COLUMN: LOADOUT GRID */}
-            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border game-card-height">
+            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border h-full overflow-hidden">
               <div>
                 <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-5 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                   <Swords className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
@@ -599,7 +599,7 @@ function App() {
                 </div>
 
                 {/* Inner scrollable area for grids */}
-                <div className="flex-grow overflow-y-auto game-card-scroll-height landscape-short:pr-1.5 medieval-scrollbar space-y-4 landscape-short:space-y-2">
+                <div className="flex-grow overflow-y-auto landscape-short:pr-1.5 medieval-scrollbar space-y-4 landscape-short:space-y-2">
                   {/* RUNES GRID */}
                   <div className="mb-6 landscape-short:mb-2">
                     <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
@@ -748,10 +748,10 @@ function App() {
 
         {/* COMBAT SCREEN */}
         {currentScreen === 'combat' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-3 gap-6 landscape-short:gap-2.5 items-stretch relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-3 gap-6 landscape-short:gap-2.5 items-stretch relative flex-grow overflow-hidden">
             
             {/* LEFT COLUMN: PLAYER STATS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all game-card-height ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all h-full overflow-hidden ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
               {/* Inner scrollable area for Player Stats */}
               <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
                 <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
@@ -806,7 +806,7 @@ function App() {
             </div>
  
             {/* MIDDLE COLUMN: COMBAT FEEDBACK AND LOGS */}
-            <div className="lg:col-span-4 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between min-h-[350px] landscape-short:min-h-0 landscape-short:h-[calc(100vh-65px)]">
+            <div className="lg:col-span-4 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between min-h-[350px] landscape-short:min-h-0 h-full overflow-hidden">
               
               <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                 <Scroll className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
@@ -814,7 +814,7 @@ function App() {
               </div>
  
               {/* CRITICAL SUCCESS BADGE OVERLAY */}
-              <div className="relative flex-grow flex flex-col">
+              <div className="relative flex-grow flex flex-col overflow-hidden">
                 {criticalBadge && (
                   <div className="absolute top-4 landscape-short:top-2 inset-x-0 mx-auto z-30 text-center animate-bounce">
                     <span className="px-3 py-1.5 landscape-short:px-2 landscape-short:py-0.5 bg-amber-500 text-slate-950 font-black text-xs landscape-short:text-[10px] rounded border-2 border-amber-300 shadow-[0_0_20px_#f59e0b] font-medieval uppercase">
@@ -857,7 +857,7 @@ function App() {
             </div>
  
             {/* RIGHT COLUMN: MONSTER STATUS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all game-card-height ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all h-full overflow-hidden ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
               {/* Inner scrollable area for monster details */}
               <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
                 <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
