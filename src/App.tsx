@@ -47,7 +47,7 @@ function App() {
   
   // Gameplay systems
   const [quenShieldActive, setQuenShieldActive] = useState(false);
-  const logEndRef = useRef<HTMLDivElement>(null);
+  const logContainerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<any>(null);
   
   // Real MP3 background audio systems
@@ -231,8 +231,8 @@ function App() {
 
   // Autoscroll combat logs
   useEffect(() => {
-    if (logEndRef.current) {
-      logEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
     }
   }, [combatLogs]);
 
@@ -824,7 +824,7 @@ function App() {
                 )}
  
                 {/* COMBAT LOGS SCROLL */}
-                <div className="flex-grow h-48 landscape-short:h-20 overflow-y-auto medieval-scrollbar pr-2 space-y-2 select-none bg-slate-950/70 p-3 border border-amber-900/10 rounded">
+                <div ref={logContainerRef} className="flex-grow h-48 landscape-short:h-20 overflow-y-auto medieval-scrollbar pr-2 space-y-2 select-none bg-slate-950/70 p-3 border border-amber-900/10 rounded">
                   {combatLogs.map((log) => (
                     <div 
                       key={log.id} 
@@ -840,7 +840,6 @@ function App() {
                       {log.text}
                     </div>
                   ))}
-                  <div ref={logEndRef} />
                 </div>
               </div>
  
