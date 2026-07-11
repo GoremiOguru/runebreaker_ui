@@ -77,3 +77,18 @@ body {
     overflow: hidden;
   }
 }
+
+/* Force landscape view on portrait mobile devices */
+@media (max-width: 900px) and (orientation: portrait) {
+  .mobile-landscape-force {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(90deg);
+    transform-origin: top left;
+    margin-left: 100vw;
+    overflow: hidden;
+  }
+}

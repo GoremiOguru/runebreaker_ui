@@ -451,51 +451,52 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-slate-950 text-gray-100 flex flex-col justify-between font-sans scanlines ${isShake ? 'animate-shake' : ''}`}>
-      
-      {/* HEADER BANNER */}
-      <header className="border-b border-amber-900/40 bg-slate-950/80 backdrop-blur-md px-6 py-4 landscape-short:px-4 landscape-short:py-1.5 flex items-center justify-between">
-        <div className="flex items-center gap-3 landscape-short:gap-2">
-          <Skull className="h-6 w-6 landscape-short:h-4.5 landscape-short:w-4.5 text-amber-500 animate-pulse" />
-          <div>
-            <h1 className="text-xl md:text-2xl landscape-short:text-base font-black tracking-wider text-amber-500 font-medieval uppercase">Runebreaker</h1>
-            <p className="text-xs landscape-short:text-[9px] text-amber-600/80 font-mono tracking-widest uppercase">The Active-Time Bestiary UI</p>
-          </div>
-        </div>
+    <div className="mobile-landscape-force">
+      <div className={`min-h-screen bg-slate-950 text-gray-100 flex flex-col justify-between font-sans scanlines ${isShake ? 'animate-shake' : ''}`}>
         
-        <div className="flex items-center gap-4 landscape-short:gap-2">
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              const nextVal = !soundEnabled;
-              setSoundEnabled(nextVal);
-              
-              if (!nextVal) {
-                if (introAudioRef.current) introAudioRef.current.pause();
-                if (winAudioRef.current) winAudioRef.current.pause();
-              } else {
-                if (currentScreen === 'prep' && introAudioRef.current) {
-                  introAudioRef.current.play().catch(() => {});
+        {/* HEADER BANNER */}
+        <header className="border-b border-amber-900/40 bg-slate-950/80 backdrop-blur-md px-6 py-4 landscape-short:px-3 landscape-short:py-1 flex items-center justify-between">
+          <div className="flex items-center gap-3 landscape-short:gap-1.5">
+            <Skull className="h-6 w-6 landscape-short:h-4 landscape-short:w-4 text-amber-500 animate-pulse" />
+            <div>
+              <h1 className="text-xl md:text-2xl landscape-short:text-xs font-black tracking-wider text-amber-500 font-medieval uppercase">Runebreaker</h1>
+              <p className="text-xs landscape-short:text-[8px] text-amber-600/80 font-mono tracking-widest uppercase">The Active-Time Bestiary UI</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4 landscape-short:gap-2">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                const nextVal = !soundEnabled;
+                setSoundEnabled(nextVal);
+                
+                if (!nextVal) {
+                  if (introAudioRef.current) introAudioRef.current.pause();
+                  if (winAudioRef.current) winAudioRef.current.pause();
+                } else {
+                  if (currentScreen === 'prep' && introAudioRef.current) {
+                    introAudioRef.current.play().catch(() => {});
+                  }
+                  playSound('click');
                 }
-                playSound('click');
-              }
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 landscape-short:px-2 landscape-short:py-0.5 rounded bg-slate-900 border border-amber-900/30 hover:border-amber-600 text-xs landscape-short:text-[10px] text-amber-500 transition-all font-mono"
-          >
-            {soundEnabled ? (
-              <>
-                <Volume2 className="h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5" />
-                <span>SOUND ON</span>
-              </>
-            ) : (
-              <>
-                <VolumeX className="h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5" />
-                <span>MUTED</span>
-              </>
-            )}
-          </button>
-        </div>
-      </header>
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 landscape-short:px-1.5 landscape-short:py-0 rounded bg-slate-900 border border-amber-900/30 hover:border-amber-600 text-xs landscape-short:text-[9px] text-amber-500 transition-all font-mono"
+            >
+              {soundEnabled ? (
+                <>
+                  <Volume2 className="h-4.5 w-4.5 landscape-short:h-3 landscape-short:w-3" />
+                  <span>SOUND ON</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="h-4.5 w-4.5 landscape-short:h-3 landscape-short:w-3" />
+                  <span>MUTED</span>
+                </>
+              )}
+            </button>
+          </div>
+        </header>
 
       {/* MAIN CONTAINER */}
       <main className="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 landscape-short:p-2 flex flex-col justify-center">
@@ -505,197 +506,203 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-2 gap-6 landscape-short:gap-3 items-stretch">
             
             {/* LEFT COLUMN: BESTIARY PROFILE */}
-            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-3 medieval-border">
-              <div className="flex items-center gap-2 landscape-short:gap-1.5 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1.5 landscape-short:mb-2">
+            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border landscape-short:h-[calc(100vh-65px)]">
+              <div className="flex items-center gap-2 landscape-short:gap-1.5 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                 <BookOpen className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
                 <h2 className="text-lg landscape-short:text-xs font-bold font-medieval text-amber-500 tracking-wide uppercase">Bestiary Index: Necrophages</h2>
               </div>
               
-              {/* MONSTER GRAPHIC (SVG) */}
-              <div className="relative w-full h-44 landscape-short:h-16 bg-slate-950 rounded border border-amber-900/20 overflow-hidden flex items-center justify-center mb-4 landscape-short:mb-2">
-                <div className="absolute inset-0 bg-radial-gradient from-transparent to-slate-950 opacity-90 z-10"></div>
-                {/* SVG swamp landscape with glowing eyes */}
-                <svg className="absolute inset-0 w-full h-full object-cover opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  {/* Bog Background */}
-                  <rect x="0" y="0" width="100" height="100" fill="#0f1e1a"/>
-                  <path d="M0,80 Q25,65 50,85 T100,75 L100,100 L0,100 Z" fill="#06100c" />
-                  <path d="M0,88 Q35,78 70,92 T100,85 L100,100 L0,100 Z" fill="#020805" />
-                  {/* Gnarly Branches */}
-                  <path d="M10,90 Q5,40 20,20 Q12,50 15,90" stroke="#000" strokeWidth="2.5" fill="none" />
-                  <path d="M85,90 Q92,50 78,30 Q88,60 87,90" stroke="#000" strokeWidth="2" fill="none" />
-                </svg>
-                {/* Glowing hag eyes */}
-                <div className="absolute flex gap-6 z-20">
-                  <div className="w-2.5 h-1.5 bg-rose-600 rounded-full shadow-[0_0_12px_#dc2626] animate-pulse"></div>
-                  <div className="w-2.5 h-1.5 bg-rose-600 rounded-full shadow-[0_0_12px_#dc2626] animate-pulse"></div>
-                </div>
-                <div className="absolute bottom-2 left-2 landscape-short:bottom-1 landscape-short:left-1 z-20 bg-slate-950/80 px-2 py-0.5 border border-amber-900/30 rounded text-[10px] landscape-short:text-[8px] text-amber-500 font-mono tracking-wider">
-                  CLASSIFIED: SWAMP HAG
-                </div>
-              </div>
-
-              {/* MONSTER STATS */}
-              <div className="space-y-3 landscape-short:space-y-1.5 flex-grow text-sm landscape-short:text-xs">
-                <div>
-                  <h3 className="font-medieval text-amber-600 font-semibold landscape-short:text-[11px]">The Swamp Hag</h3>
-                  <p className="text-xs landscape-short:text-[10px] landscape-short:leading-tight text-gray-400 font-lore leading-relaxed italic mt-1 landscape-short:mt-0.5">
-                    "Lurks deep in toxic bog waters. Disguises itself as clumps of swamp moss, drowning unwary travelers in silt before tearing them apart. Only a silver blade coated in necrophage oil and the igniting spark of Igni can pierce its thick, mud-hardened hide."
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3 landscape-short:gap-1.5 pt-2 landscape-short:pt-0">
-                  <div className="bg-slate-950/60 p-2 landscape-short:p-1 rounded border border-amber-900/10">
-                    <span className="text-[10px] landscape-short:text-[8px] text-amber-600 font-mono block uppercase">Vulnerabilities</span>
-                    <span className="text-xs landscape-short:text-[10px] font-semibold text-emerald-400 font-mono">Igni Rune, Necrophage Oil</span>
+              {/* Inner scrollable area for Bestiary */}
+              <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
+                {/* MONSTER GRAPHIC (SVG) */}
+                <div className="relative w-full h-44 landscape-short:h-12 bg-slate-950 rounded border border-amber-900/20 overflow-hidden flex items-center justify-center mb-4 landscape-short:mb-2 shrink-0">
+                  <div className="absolute inset-0 bg-radial-gradient from-transparent to-slate-950 opacity-90 z-10"></div>
+                  {/* SVG swamp landscape with glowing eyes */}
+                  <svg className="absolute inset-0 w-full h-full object-cover opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    {/* Bog Background */}
+                    <rect x="0" y="0" width="100" height="100" fill="#0f1e1a"/>
+                    <path d="M0,80 Q25,65 50,85 T100,75 L100,100 L0,100 Z" fill="#06100c" />
+                    <path d="M0,88 Q35,78 70,92 T100,85 L100,100 L0,100 Z" fill="#020805" />
+                    {/* Gnarly Branches */}
+                    <path d="M10,90 Q5,40 20,20 Q12,50 15,90" stroke="#000" strokeWidth="2.5" fill="none" />
+                    <path d="M85,90 Q92,50 78,30 Q88,60 87,90" stroke="#000" strokeWidth="2" fill="none" />
+                  </svg>
+                  {/* Glowing hag eyes */}
+                  <div className="absolute flex gap-6 z-20">
+                    <div className="w-2.5 h-1.5 bg-rose-600 rounded-full shadow-[0_0_12px_#dc2626] animate-pulse"></div>
+                    <div className="w-2.5 h-1.5 bg-rose-600 rounded-full shadow-[0_0_12px_#dc2626] animate-pulse"></div>
                   </div>
-                  <div className="bg-slate-950/60 p-2 landscape-short:p-1 rounded border border-amber-900/10">
-                    <span className="text-[10px] landscape-short:text-[8px] text-amber-600 font-mono block uppercase">Strengths</span>
-                    <span className="text-xs landscape-short:text-[10px] font-semibold text-rose-400 font-mono">Axii Immune, High HP</span>
+                  <div className="absolute bottom-2 left-2 landscape-short:bottom-1 landscape-short:left-1 z-20 bg-slate-950/80 px-2 py-0.5 border border-amber-900/30 rounded text-[10px] landscape-short:text-[8px] text-amber-500 font-mono tracking-wider">
+                    CLASSIFIED: SWAMP HAG
                   </div>
                 </div>
 
-                <div className="bg-amber-950/20 border border-amber-950/60 rounded p-2.5 landscape-short:p-1.5 flex items-start gap-2 landscape-short:gap-1">
-                  <AlertTriangle className="h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 text-amber-500 shrink-0 mt-0.5" />
-                  <p className="text-xs landscape-short:text-[9px] landscape-short:leading-tight text-amber-300 font-mono">
-                    <span className="font-bold">WITHERING INTELLIGENCE:</span> Equipping the <span className="underline">Igni Rune</span> will trigger 2x magical damage. Coating the sword in <span className="underline">Necrophage Oil</span> adds +5 DMG to strikes.
-                  </p>
+                {/* MONSTER STATS */}
+                <div className="space-y-3 landscape-short:space-y-1.5 text-sm landscape-short:text-xs">
+                  <div>
+                    <h3 className="font-medieval text-amber-600 font-semibold landscape-short:text-[11px]">The Swamp Hag</h3>
+                    <p className="text-xs landscape-short:text-[10px] landscape-short:leading-tight text-gray-400 font-lore leading-relaxed italic mt-1 landscape-short:mt-0.5">
+                      "Lurks deep in toxic bog waters. Disguises itself as clumps of swamp moss, drowning unwary travelers in silt before tearing them apart. Only a silver blade coated in necrophage oil and the igniting spark of Igni can pierce its thick, mud-hardened hide."
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3 landscape-short:gap-1.5 pt-2 landscape-short:pt-0">
+                    <div className="bg-slate-950/60 p-2 landscape-short:p-1 rounded border border-amber-900/10">
+                      <span className="text-[10px] landscape-short:text-[8px] text-amber-600 font-mono block uppercase">Vulnerabilities</span>
+                      <span className="text-xs landscape-short:text-[10px] font-semibold text-emerald-400 font-mono">Igni Rune, Necrophage Oil</span>
+                    </div>
+                    <div className="bg-slate-950/60 p-2 landscape-short:p-1 rounded border border-amber-900/10">
+                      <span className="text-[10px] landscape-short:text-[8px] text-amber-600 font-mono block uppercase">Strengths</span>
+                      <span className="text-xs landscape-short:text-[10px] font-semibold text-rose-400 font-mono">Axii Immune, High HP</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-amber-950/20 border border-amber-950/60 rounded p-2.5 landscape-short:p-1.5 flex items-start gap-2 landscape-short:gap-1">
+                    <AlertTriangle className="h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 text-amber-500 shrink-0 mt-0.5" />
+                    <p className="text-xs landscape-short:text-[9px] landscape-short:leading-tight text-amber-300 font-mono">
+                      <span className="font-bold">WITHERING INTELLIGENCE:</span> Equipping the <span className="underline">Igni Rune</span> will trigger 2x magical damage. Coating the sword in <span className="underline">Necrophage Oil</span> adds +5 DMG to strikes.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* RIGHT COLUMN: LOADOUT GRID */}
-            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-3 medieval-border">
+            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border landscape-short:h-[calc(100vh-65px)]">
               <div>
-                <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-5 landscape-short:pb-1.5 landscape-short:mb-2">
+                <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-5 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                   <Swords className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
                   <h2 className="text-lg landscape-short:text-xs font-bold font-medieval text-amber-500 tracking-wide uppercase">Witcher Loadout Preparations</h2>
                 </div>
 
-                {/* RUNES GRID */}
-                <div className="mb-6 landscape-short:mb-2">
-                  <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
-                    <Zap className="h-3.5 w-3.5" /> 1. Select Active Witcher Rune Sign
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 landscape-short:grid-cols-3 gap-3 landscape-short:gap-1.5">
-                    
-                    {/* IGNI */}
-                    <button
-                      onClick={() => { setEquippedRune('Igni'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedRune === 'Igni'
-                          ? 'bg-amber-950/20 border-amber-500 ring-2 ring-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Flame className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Igni' ? 'text-orange-500' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">IGNI</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Fire burst magic. Target vulnerability matches.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-orange-500 font-mono font-bold">2x DMG BONUS</span>
-                    </button>
+                {/* Inner scrollable area for grids */}
+                <div className="flex-grow overflow-y-auto landscape-short:max-h-[calc(100vh-175px)] landscape-short:pr-1.5 medieval-scrollbar space-y-4 landscape-short:space-y-2">
+                  {/* RUNES GRID */}
+                  <div className="mb-6 landscape-short:mb-2">
+                    <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
+                      <Zap className="h-3.5 w-3.5" /> 1. Select Active Witcher Rune Sign
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 landscape-short:grid-cols-3 gap-3 landscape-short:gap-1.5">
+                      
+                      {/* IGNI */}
+                      <button
+                        onClick={() => { setEquippedRune('Igni'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedRune === 'Igni'
+                            ? 'bg-amber-950/20 border-amber-500 ring-2 ring-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Flame className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Igni' ? 'text-orange-500' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">IGNI</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Fire burst magic. Target vulnerability matches.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-orange-500 font-mono font-bold">2x DMG BONUS</span>
+                      </button>
 
-                    {/* QUEN */}
-                    <button
-                      onClick={() => { setEquippedRune('Quen'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedRune === 'Quen'
-                          ? 'bg-cyan-950/20 border-cyan-500 ring-2 ring-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Shield className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Quen' ? 'text-cyan-400' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">QUEN</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Barrier shield. Absorbs first enemy claw attack.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-cyan-400 font-mono font-bold">BLOCK EFFECT</span>
-                    </button>
+                      {/* QUEN */}
+                      <button
+                        onClick={() => { setEquippedRune('Quen'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedRune === 'Quen'
+                            ? 'bg-cyan-950/20 border-cyan-500 ring-2 ring-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Shield className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Quen' ? 'text-cyan-400' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">QUEN</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Barrier shield. Absorbs first enemy claw attack.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-cyan-400 font-mono font-bold">BLOCK EFFECT</span>
+                      </button>
 
-                    {/* AXII */}
-                    <button
-                      onClick={() => { setEquippedRune('Axii'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedRune === 'Axii'
-                          ? 'bg-purple-950/20 border-purple-500 ring-2 ring-purple-500/60 shadow-[0_0_15px_rgba(168,85,247,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Sparkles className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Axii' ? 'text-purple-400' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">AXII</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Mind hex. The target has mental immunity.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-purple-400 font-mono font-bold">MUTED EFFECT</span>
-                    </button>
+                      {/* AXII */}
+                      <button
+                        onClick={() => { setEquippedRune('Axii'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedRune === 'Axii'
+                            ? 'bg-purple-950/20 border-purple-500 ring-2 ring-purple-500/60 shadow-[0_0_15px_rgba(168,85,247,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Sparkles className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedRune === 'Axii' ? 'text-purple-400' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">AXII</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Mind hex. The target has mental immunity.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-purple-400 font-mono font-bold">MUTED EFFECT</span>
+                      </button>
 
+                    </div>
                   </div>
-                </div>
 
-                {/* BLADE OILS GRID */}
-                <div>
-                  <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
-                    <Droplet className="h-3.5 w-3.5" /> 2. Apply Blade Oil Coating
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 landscape-short:grid-cols-3 gap-3 landscape-short:gap-1.5">
-                    
-                    {/* NECROPHAGE OIL */}
-                    <button
-                      onClick={() => { setEquippedOil('Necrophage'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedOil === 'Necrophage'
-                          ? 'bg-emerald-950/20 border-emerald-500 ring-2 ring-emerald-500/60 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Necrophage' ? 'text-emerald-400' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">NECROPHAGE</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Coating designed for corpse eaters. Match vulnerability.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-emerald-400 font-mono font-bold">+5 PHYSICAL DMG</span>
-                    </button>
+                  {/* BLADE OILS GRID */}
+                  <div>
+                    <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
+                      <Droplet className="h-3.5 w-3.5" /> 2. Apply Blade Oil Coating
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 landscape-short:grid-cols-3 gap-3 landscape-short:gap-1.5">
+                      
+                      {/* NECROPHAGE OIL */}
+                      <button
+                        onClick={() => { setEquippedOil('Necrophage'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedOil === 'Necrophage'
+                            ? 'bg-emerald-950/20 border-emerald-500 ring-2 ring-emerald-500/60 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Necrophage' ? 'text-emerald-400' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">NECROPHAGE</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Coating designed for corpse eaters. Match vulnerability.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-emerald-400 font-mono font-bold">+5 PHYSICAL DMG</span>
+                      </button>
 
-                    {/* SPECTER OIL */}
-                    <button
-                      onClick={() => { setEquippedOil('Specter'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedOil === 'Specter'
-                          ? 'bg-rose-950/20 border-rose-500 ring-2 ring-rose-500/60 shadow-[0_0_15px_rgba(244,63,94,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Specter' ? 'text-rose-400' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">SPECTER</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Formulated for wraiths. Ineffective here.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-rose-400 font-mono font-bold">NO EFFECT</span>
-                    </button>
+                      {/* SPECTER OIL */}
+                      <button
+                        onClick={() => { setEquippedOil('Specter'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedOil === 'Specter'
+                            ? 'bg-rose-950/20 border-rose-500 ring-2 ring-rose-500/60 shadow-[0_0_15px_rgba(244,63,94,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Specter' ? 'text-rose-400' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">SPECTER</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Formulated for wraiths. Ineffective here.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-rose-400 font-mono font-bold">NO EFFECT</span>
+                      </button>
 
-                    {/* DRACONID OIL */}
-                    <button
-                      onClick={() => { setEquippedOil('Draconid'); playSound('click'); }}
-                      className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
-                        equippedOil === 'Draconid'
-                          ? 'bg-blue-950/20 border-blue-500 ring-2 ring-blue-500/60 shadow-[0_0_15px_rgba(59,130,246,0.2)]'
-                          : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
-                        <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Draconid' ? 'text-blue-400' : 'text-gray-400'}`} />
-                        <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">DRACONID</span>
-                      </div>
-                      <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Formulated for drakes. Ineffective here.</p>
-                      <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-blue-400 font-mono font-bold">NO EFFECT</span>
-                    </button>
+                      {/* DRACONID OIL */}
+                      <button
+                        onClick={() => { setEquippedOil('Draconid'); playSound('click'); }}
+                        className={`relative p-3.5 landscape-short:p-1.5 rounded-lg border text-left transition-all ${
+                          equippedOil === 'Draconid'
+                            ? 'bg-blue-950/20 border-blue-500 ring-2 ring-blue-500/60 shadow-[0_0_15px_rgba(59,130,246,0.2)]'
+                            : 'bg-slate-950/50 border-amber-900/20 hover:border-amber-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 landscape-short:gap-1 mb-1.5 landscape-short:mb-0.5">
+                          <Droplet className={`h-4.5 w-4.5 landscape-short:h-3.5 landscape-short:w-3.5 ${equippedOil === 'Draconid' ? 'text-blue-400' : 'text-gray-400'}`} />
+                          <span className="text-sm landscape-short:text-xs font-medieval font-bold text-gray-200">DRACONID</span>
+                        </div>
+                        <p className="text-[11px] text-gray-400 font-mono landscape-short:hidden">Formulated for drakes. Ineffective here.</p>
+                        <span className="absolute bottom-1 right-2 landscape-short:bottom-0.5 landscape-short:right-1 text-[9px] landscape-short:text-[8px] text-blue-400 font-mono font-bold">NO EFFECT</span>
+                      </button>
 
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* ACTION BEGIN BUTTON */}
-              <div className="mt-8 landscape-short:mt-3 pt-4 landscape-short:pt-1.5 border-t border-amber-900/20 flex flex-col md:flex-row landscape-short:flex-row items-center gap-4 landscape-short:gap-2 justify-between">
+              <div className="mt-8 landscape-short:mt-2.5 pt-4 landscape-short:pt-1.5 border-t border-amber-900/20 flex flex-col md:flex-row landscape-short:flex-row items-center gap-4 landscape-short:gap-2 justify-between shrink-0">
                 <div className="text-xs landscape-short:text-[9px] landscape-short:leading-tight font-mono text-gray-400 text-center md:text-left">
                   {equippedRune === 'none' || equippedOil === 'none' ? (
                     <span className="text-amber-600 animate-pulse block">⚠️ Recommended: Equip Rune & Oil before begining!</span>
@@ -722,9 +729,10 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-3 gap-6 landscape-short:gap-2.5 items-stretch relative">
             
             {/* LEFT COLUMN: PLAYER STATS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-3 medieval-border flex flex-col justify-between transition-all ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
-              <div>
-                <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1.5 landscape-short:mb-2">
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all landscape-short:h-[calc(100vh-65px)] ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
+              {/* Inner scrollable area for Player Stats */}
+              <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
+                <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                   <div className="flex items-center gap-2">
                     <Heart className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-red-500 animate-pulse" />
                     <h2 className="text-md landscape-short:text-xs font-bold font-medieval text-amber-500 uppercase">Witcher Status</h2>
@@ -742,7 +750,7 @@ function App() {
                     <span className="text-gray-400 uppercase">VITALITY</span>
                     <span className="text-red-400 font-bold">{playerHp} / 100 HP</span>
                   </div>
-                  <div className="w-full bg-slate-950 h-5 landscape-short:h-3.5 border border-amber-900/30 rounded p-0.5 overflow-hidden">
+                  <div className="w-full bg-slate-950 h-5 landscape-short:h-3 border border-amber-900/30 rounded p-0.5 overflow-hidden">
                     <div 
                       className="bg-gradient-to-r from-red-800 to-red-600 h-full rounded transition-all duration-300 ease-out shadow-[0_0_10px_rgba(239,68,68,0.3)]"
                       style={{ width: `${playerHp}%` }}
@@ -751,7 +759,7 @@ function App() {
                 </div>
  
                 {/* ACTIVE EQUIPMENT SUMMARY */}
-                <div className="mt-6 landscape-short:mt-2.5 space-y-3 landscape-short:space-y-1.5 font-mono text-xs">
+                <div className="mt-6 landscape-short:mt-2 space-y-3 landscape-short:space-y-1.5 font-mono text-xs">
                   <span className="text-amber-600 block border-b border-amber-900/10 pb-1 landscape-short:pb-0.5 uppercase text-[10px] landscape-short:text-[9px]">ACTIVE COMBAT BUFFS</span>
                   <div className="flex items-center justify-between bg-slate-950/50 p-2 landscape-short:p-1.5 border border-amber-900/10 rounded">
                     <span className="text-gray-400">Rune Power:</span>
@@ -766,19 +774,19 @@ function App() {
                     </span>
                   </div>
                 </div>
-              </div>
- 
-              <div className="mt-6 landscape-short:mt-2.5 p-3 landscape-short:p-1.5 bg-red-950/20 border border-red-900/30 rounded text-center">
-                <p className="text-[11px] landscape-short:text-[9px] landscape-short:leading-tight text-red-400 font-mono">
-                  🚨 Enemy attacks automatically every <span className="font-bold underline">1.5s</span> dealing <span className="font-bold">15 damage</span>! Quick reflexes required.
-                </p>
+
+                <div className="mt-6 landscape-short:mt-2 p-3 landscape-short:p-1.5 bg-red-950/20 border border-red-900/30 rounded text-center shrink-0">
+                  <p className="text-[11px] landscape-short:text-[9px] landscape-short:leading-tight text-red-400 font-mono">
+                    🚨 Enemy attacks automatically every <span className="font-bold underline">1.5s</span> dealing <span className="font-bold">15 damage</span>! Quick reflexes required.
+                  </p>
+                </div>
               </div>
             </div>
  
             {/* MIDDLE COLUMN: COMBAT FEEDBACK AND LOGS */}
-            <div className="lg:col-span-4 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-3 medieval-border flex flex-col justify-between min-h-[350px] landscape-short:min-h-0">
+            <div className="lg:col-span-4 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between min-h-[350px] landscape-short:min-h-0 landscape-short:h-[calc(100vh-65px)]">
               
-              <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1.5 landscape-short:mb-2">
+              <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                 <Scroll className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
                 <h2 className="text-md landscape-short:text-xs font-bold font-medieval text-amber-500 uppercase">Chronicle of Combat</h2>
               </div>
@@ -794,7 +802,7 @@ function App() {
                 )}
  
                 {/* COMBAT LOGS SCROLL */}
-                <div className="flex-grow h-48 landscape-short:h-24 overflow-y-auto medieval-scrollbar pr-2 space-y-2 select-none bg-slate-950/70 p-3 border border-amber-900/10 rounded">
+                <div className="flex-grow h-48 landscape-short:h-20 overflow-y-auto medieval-scrollbar pr-2 space-y-2 select-none bg-slate-950/70 p-3 border border-amber-900/10 rounded">
                   {combatLogs.map((log) => (
                     <div 
                       key={log.id} 
@@ -815,7 +823,7 @@ function App() {
               </div>
  
               {/* RETREAT ACTION */}
-              <div className="mt-4 landscape-short:mt-2.5 border-t border-amber-900/20 pt-4 landscape-short:pt-1.5 text-center">
+              <div className="mt-4 landscape-short:mt-2 border-t border-amber-900/20 pt-4 landscape-short:pt-1.5 text-center shrink-0">
                 <button
                   onClick={resetToPrep}
                   className="px-4 py-1.5 landscape-short:px-3 landscape-short:py-1 bg-slate-950 hover:bg-slate-900 border border-red-900/30 hover:border-red-600 text-[10px] landscape-short:text-[9px] text-red-500 font-mono uppercase tracking-widest rounded transition-all"
@@ -827,9 +835,10 @@ function App() {
             </div>
  
             {/* RIGHT COLUMN: MONSTER STATUS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-3 medieval-border flex flex-col justify-between transition-all ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
-              <div>
-                <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1.5 landscape-short:mb-2">
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all landscape-short:h-[calc(100vh-65px)] ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
+              {/* Inner scrollable area for monster details */}
+              <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
+                <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                   <div className="flex items-center gap-2">
                     <Skull className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-emerald-500 animate-pulse" />
                     <h2 className="text-md landscape-short:text-xs font-bold font-medieval text-emerald-500 uppercase">Swamp Hag</h2>
@@ -845,7 +854,7 @@ function App() {
                     <span className="text-gray-400 uppercase">VITALITY</span>
                     <span className="text-emerald-400 font-bold">{monsterHp} / 150 HP</span>
                   </div>
-                  <div className="w-full bg-slate-950 h-5 landscape-short:h-3.5 border border-amber-900/30 rounded p-0.5 overflow-hidden">
+                  <div className="w-full bg-slate-950 h-5 landscape-short:h-3 border border-amber-900/30 rounded p-0.5 overflow-hidden">
                     <div 
                       className="bg-gradient-to-r from-emerald-800 to-emerald-600 h-full rounded transition-all duration-300 ease-out shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                       style={{ width: `${(monsterHp / 150) * 100}%` }}
@@ -854,7 +863,7 @@ function App() {
                 </div>
  
                 {/* MONSTER GRAPHIC SILHOUETTE */}
-                <div className="relative w-full h-28 landscape-short:h-12 bg-slate-950 rounded border border-amber-900/10 overflow-hidden flex items-center justify-center mt-5 landscape-short:mt-2">
+                <div className="relative w-full h-28 landscape-short:h-8 bg-slate-950 rounded border border-amber-900/10 overflow-hidden flex items-center justify-center mt-5 landscape-short:mt-2 shrink-0">
                   <svg className="absolute inset-0 w-full h-full object-cover opacity-35" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <rect x="0" y="0" width="100" height="100" fill="#0f1e1a"/>
                     <path d="M0,80 Q25,65 50,85 T100,75 L100,100 L0,100 Z" fill="#06100c" />
@@ -871,7 +880,7 @@ function App() {
               </div>
  
               {/* INTERACTIVE PLAYER ACTION BUTTONS */}
-              <div className="mt-6 landscape-short:mt-2.5 space-y-3 landscape-short:space-y-1.5">
+              <div className="mt-6 landscape-short:mt-2 space-y-3 landscape-short:space-y-1.5 shrink-0">
                 <button
                   onClick={handleSilverSlash}
                   className="w-full py-3 landscape-short:py-1.5 bg-gradient-to-r from-slate-800 to-slate-700 hover:from-slate-700 hover:to-slate-600 border border-slate-600 hover:border-amber-600 text-gray-100 font-bold font-medieval text-xs landscape-short:text-[10px] uppercase rounded flex items-center justify-center gap-2 transition-all transform active:scale-95"
@@ -896,18 +905,18 @@ function App() {
 
         {/* VICTORY SCREEN */}
         {currentScreen === 'victory' && (
-          <div className="max-w-md landscape-short:max-w-sm w-full mx-auto bg-slate-900/90 border-2 border-amber-500 rounded-lg p-8 landscape-short:p-4 text-center shadow-[0_0_40px_rgba(245,158,11,0.2)] medieval-border-active animate-fade-in">
-            <Trophy className="h-16 w-16 landscape-short:h-8 landscape-short:w-8 text-amber-500 mx-auto mb-4 landscape-short:mb-1.5 animate-bounce" />
+          <div className="max-w-md landscape-short:max-w-sm w-full mx-auto bg-slate-900/90 border-2 border-amber-500 rounded-lg p-8 landscape-short:p-3 text-center shadow-[0_0_40px_rgba(245,158,11,0.2)] medieval-border-active animate-fade-in">
+            <Trophy className="h-16 w-16 landscape-short:h-8 landscape-short:w-8 text-amber-500 mx-auto mb-4 landscape-short:mb-1 animate-bounce" />
             <h2 className="text-2xl landscape-short:text-base font-black font-medieval text-amber-500 tracking-wider mb-2 landscape-short:mb-0.5 uppercase">The Beast Has Fallen</h2>
             <p className="text-xs landscape-short:text-[9px] text-amber-600 font-mono tracking-widest uppercase mb-6 landscape-short:mb-2">Swamp Hag Slain Successfully</p>
             
-            <div className="bg-slate-950 p-4 landscape-short:p-2 rounded border border-amber-900/20 text-left space-y-3 landscape-short:space-y-1 mb-6 landscape-short:mb-3">
+            <div className="bg-slate-950 p-4 landscape-short:p-2 rounded border border-amber-900/20 text-left space-y-3 landscape-short:space-y-1 mb-6 landscape-short:mb-2.5">
               <span className="text-[10px] text-amber-600 font-mono block uppercase border-b border-amber-900/10 pb-1">Trophy & Loot Claimed</span>
-              <ul className="text-xs landscape-short:text-[10px] font-mono space-y-1.5 landscape-short:space-y-1 text-gray-300">
-                <li className="flex items-center gap-2 text-emerald-400">✔️ Swamp Hag Head (Trophy)</li>
-                <li className="flex items-center gap-2">✔️ 2x Necrophage Mutagens</li>
+              <ul className="text-xs landscape-short:text-[10px] font-mono grid grid-cols-1 landscape-short:grid-cols-2 gap-1.5 landscape-short:gap-x-4 landscape-short:gap-y-0.5 text-gray-300">
+                <li className="flex items-center gap-2 text-emerald-400">✔️ Swamp Hag Head</li>
+                <li className="flex items-center gap-2">✔️ 2x Mutagens</li>
                 <li className="flex items-center gap-2">✔️ 150x Crown Coins</li>
-                <li className="flex items-center gap-2 text-amber-500">✔️ Witcher Reputation Increased (+25)</li>
+                <li className="flex items-center gap-2 text-amber-500">✔️ Reputation (+25)</li>
               </ul>
             </div>
 
@@ -923,14 +932,14 @@ function App() {
 
         {/* GAME OVER SCREEN */}
         {currentScreen === 'gameover' && (
-          <div className="max-w-md landscape-short:max-w-sm w-full mx-auto bg-red-950/40 border-2 border-red-600 rounded-lg p-8 landscape-short:p-4 text-center shadow-[0_0_40px_rgba(220,38,38,0.2)] text-gray-200">
-            <Skull className="h-16 w-16 landscape-short:h-8 landscape-short:w-8 text-red-600 mx-auto mb-4 landscape-short:mb-1.5 animate-pulse" />
+          <div className="max-w-md landscape-short:max-w-sm w-full mx-auto bg-red-950/40 border-2 border-red-600 rounded-lg p-8 landscape-short:p-3 text-center shadow-[0_0_40px_rgba(220,38,38,0.2)] text-gray-200">
+            <Skull className="h-16 w-16 landscape-short:h-8 landscape-short:w-8 text-red-600 mx-auto mb-4 landscape-short:mb-1 animate-pulse" />
             <h2 className="text-2xl landscape-short:text-base font-black font-medieval text-red-500 tracking-wider mb-2 landscape-short:mb-0.5 uppercase">You Have Slain No More</h2>
             <p className="text-xs landscape-short:text-[9px] text-red-600/80 font-mono tracking-widest uppercase mb-6 landscape-short:mb-2">Swallowed by Blackwater Bog</p>
             
-            <div className="bg-slate-950/80 p-4 landscape-short:p-2 rounded border border-red-950/40 text-left space-y-2.5 landscape-short:space-y-1.5 mb-6 landscape-short:mb-3 text-gray-400 text-xs landscape-short:text-[10px] landscape-short:leading-tight font-mono">
+            <div className="bg-slate-950/80 p-4 landscape-short:p-2 rounded border border-red-950/40 text-left space-y-2.5 landscape-short:space-y-1.5 mb-6 landscape-short:mb-2.5 text-gray-400 text-xs landscape-short:text-[10px] landscape-short:leading-tight font-mono">
               <p>💀 Your vitality reached 0. The Swamp Hag dragged your body into the deep mud.</p>
-              <p className="text-red-400/80">Tip: Ensure you select the <span className="underline font-bold text-red-400">Igni Rune</span> and coat your blade with <span className="underline font-bold text-red-400">Necrophage Oil</span> before starting the fight to maximize damage before the Hag overwhelms you!</p>
+              <p className="text-red-400/80">Tip: Select <span className="underline font-bold text-red-400">Igni Rune</span> & coat blade with <span className="underline font-bold text-red-400">Necrophage Oil</span> before the fight!</p>
             </div>
 
             <button
@@ -946,9 +955,10 @@ function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-amber-900/20 bg-slate-950/80 py-4 landscape-short:py-1.5 text-center text-[10px] landscape-short:text-[8px] text-amber-700/60 font-mono uppercase tracking-widest">
+      <footer className="border-t border-amber-900/20 bg-slate-950/80 py-4 landscape-short:py-1 flex items-center justify-center text-center text-[10px] landscape-short:text-[8px] text-amber-700/60 font-mono uppercase tracking-widest">
         Runebreaker Combat Dashboard • Designed for Witcher Guild Academic Submission
       </footer>
+      </div>
     </div>
   );
 }
