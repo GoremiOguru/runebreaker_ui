@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #030712; /* bg-slate-950 */
+  color: #f3f4f6; /* text-gray-100 */
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  display: block;
+  border-inline: none;
+}
+
+/* Medieval Font styles */
+.font-medieval {
+  font-family: 'Cinzel', serif;
+}
+
+.font-lore {
+  font-family: 'IM Fell English', serif;
+}
+
+/* Custom scrollbars for combat logs */
+.medieval-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.medieval-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+  border-left: 1px solid rgba(217, 119, 6, 0.2); /* amber-600 */
+}
+.medieval-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 6, 0.4); /* amber-600 */
+  border-radius: 3px;
+}
+.medieval-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.7);
+}
+
+/* Scanlines overlay effect to give a tactical monitor or grimy game layout */
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+/* Medieval borders & card design */
+.medieval-border {
+  border: 1px solid rgba(217, 119, 6, 0.15);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(217, 119, 6, 0.03);
+}
+
+.medieval-border-active {
+  border: 1px solid rgba(217, 119, 6, 0.7);
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.25), inset 0 0 10px rgba(217, 119, 6, 0.1);
+}
+
+/* Prevent body scrolling on short landscape screens to ensure native app feel */
+@media (orientation: landscape) and (max-height: 600px) {
+  body {
+    overflow: hidden;
+  }
+}
