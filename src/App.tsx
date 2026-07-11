@@ -529,7 +529,7 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-2 gap-6 landscape-short:gap-3 items-stretch">
             
             {/* LEFT COLUMN: BESTIARY PROFILE */}
-            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border landscape-short:h-[calc(100vh-65px)]">
+            <div className="lg:col-span-5 landscape-short:col-span-1 flex flex-col bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border game-card-height">
               <div className="flex items-center gap-2 landscape-short:gap-1.5 border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                 <BookOpen className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
                 <h2 className="text-lg landscape-short:text-xs font-bold font-medieval text-amber-500 tracking-wide uppercase">Bestiary Index: Necrophages</h2>
@@ -591,7 +591,7 @@ function App() {
             </div>
 
             {/* RIGHT COLUMN: LOADOUT GRID */}
-            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border landscape-short:h-[calc(100vh-65px)]">
+            <div className="lg:col-span-7 landscape-short:col-span-1 flex flex-col justify-between bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border game-card-height">
               <div>
                 <div className="flex items-center gap-2 border-b border-amber-900/30 pb-3 mb-5 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
                   <Swords className="h-5 w-5 landscape-short:h-4 landscape-short:w-4 text-amber-500" />
@@ -599,7 +599,7 @@ function App() {
                 </div>
 
                 {/* Inner scrollable area for grids */}
-                <div className="flex-grow overflow-y-auto landscape-short:max-h-[calc(100vh-175px)] landscape-short:pr-1.5 medieval-scrollbar space-y-4 landscape-short:space-y-2">
+                <div className="flex-grow overflow-y-auto game-card-scroll-height landscape-short:pr-1.5 medieval-scrollbar space-y-4 landscape-short:space-y-2">
                   {/* RUNES GRID */}
                   <div className="mb-6 landscape-short:mb-2">
                     <h3 className="text-xs landscape-short:text-[10px] text-amber-600 font-mono tracking-wider uppercase mb-3 landscape-short:mb-1.5 flex items-center gap-1.5">
@@ -742,7 +742,6 @@ function App() {
                   [ BEGIN HUNT ]
                 </button>
               </div>
-
             </div>
           </div>
         )}
@@ -752,7 +751,7 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 landscape-short:grid-cols-3 gap-6 landscape-short:gap-2.5 items-stretch relative">
             
             {/* LEFT COLUMN: PLAYER STATS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all landscape-short:h-[calc(100vh-65px)] ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all game-card-height ${isPlayerDmgFlash ? 'animate-flash-red border-red-500' : ''}`}>
               {/* Inner scrollable area for Player Stats */}
               <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
                 <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
@@ -797,7 +796,7 @@ function App() {
                     </span>
                   </div>
                 </div>
-
+ 
                 <div className="mt-6 landscape-short:mt-2 p-3 landscape-short:p-1.5 bg-red-950/20 border border-red-900/30 rounded text-center shrink-0">
                   <p className="text-[11px] landscape-short:text-[9px] landscape-short:leading-tight text-red-400 font-mono">
                     🚨 Enemy attacks automatically every <span className="font-bold underline">1.5s</span> dealing <span className="font-bold">15 damage</span>! Quick reflexes required.
@@ -858,7 +857,7 @@ function App() {
             </div>
  
             {/* RIGHT COLUMN: MONSTER STATUS */}
-            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all landscape-short:h-[calc(100vh-65px)] ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
+            <div className={`lg:col-span-4 landscape-short:col-span-1 bg-slate-900/70 border border-amber-900/30 rounded-lg p-5 landscape-short:p-2.5 medieval-border flex flex-col justify-between transition-all game-card-height ${isMonsterDmgFlash ? 'animate-flash-green border-emerald-500' : ''}`}>
               {/* Inner scrollable area for monster details */}
               <div className="flex-grow overflow-y-auto space-y-3 landscape-short:space-y-1.5 landscape-short:pr-1.5 medieval-scrollbar">
                 <div className="flex items-center justify-between border-b border-amber-900/30 pb-3 mb-4 landscape-short:pb-1 landscape-short:mb-2 shrink-0">
